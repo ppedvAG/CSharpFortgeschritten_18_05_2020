@@ -1,23 +1,33 @@
 ﻿using Bogus;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace HalloLinq
 {
     public partial class Form1 : Form
     {
+
+        event Action<object, int> MeinTollesEvent;
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //   if (MeinTollesEvent != null)
+            //       MeinTollesEvent.Invoke(this, DateTime.Now.Second);
+            MeinTollesEvent?.Invoke(this, DateTime.Now.Second);
+        }
+
         public List<Person> Personen { get; set; } = new List<Person>();
 
         public Form1()
         {
             InitializeComponent();
+            this.MeinTollesEvent += CoolerHandler;
+            this.MeinTollesEvent += (o, i) => MessageBox.Show("ANNNOOO " + i.ToString());
+            this.MeinTollesEvent -= CoolerHandler;
+
             var faker = new Faker<Person>();
             faker.RuleFor(x => x.Name, (f, u) => f.Person.FullName);
             faker.RuleFor(x => x.GebDatum, (f, u) => f.Date.Past(50));
@@ -36,6 +46,11 @@ namespace HalloLinq
                 //    GebDatum = DateTime.Now.AddYears(-50).AddHours(i * 27)
                 //});
             }
+        }
+
+        private void CoolerHandler(object arg1, int arg2)
+        {
+            MessageBox.Show(arg2.ToString());
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -78,6 +93,8 @@ namespace HalloLinq
 
             MessageBox.Show(string.Join(", ", orte));
         }
+
+
     }
 
     public class Person
