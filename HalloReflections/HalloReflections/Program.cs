@@ -24,11 +24,17 @@ namespace HalloReflections
                 }
             }
 
+            //über das Interface
             Type classMitWetter = ass.GetTypes().Where(x => x.GetInterfaces().Any(y => y == (typeof(ISagMirDeinWetter)))).FirstOrDefault();
-
             ISagMirDeinWetter wetterDings = (ISagMirDeinWetter)Activator.CreateInstance(classMitWetter);
             Console.WriteLine("Wetter von dings:" + wetterDings.GetWetter());
 
+            //nur Strings
+            Type classMitWetterByName = ass.GetType("ClassLibrary1.Class2");
+            object obj = Activator.CreateInstance(classMitWetterByName);
+            MethodInfo mi = classMitWetterByName.GetMethod("GetWetter");
+            object res = mi.Invoke(obj, null);
+            Console.WriteLine($"per string geladen: {res}");
 
             Console.WriteLine("Ende");
             Console.ReadLine();
