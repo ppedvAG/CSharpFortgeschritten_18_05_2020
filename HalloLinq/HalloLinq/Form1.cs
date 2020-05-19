@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace HalloLinq
 {
@@ -46,6 +48,15 @@ namespace HalloLinq
                 //    GebDatum = DateTime.Now.AddYears(-50).AddHours(i * 27)
                 //});
             }
+
+            var xDoc = new XDocument(); //linq-to-xml
+            xDoc.Root.DescendantNodes().Where(x => x.NodeType == System.Xml.XmlNodeType.Element);
+
+            var xmlDoc = new XmlDocument(); //alles im Speicher
+
+            var xmlReader = XmlReader.Create(""); //elementweise (schnell)
+           
+
         }
 
         private void CoolerHandler(object arg1, int arg2)
