@@ -10,8 +10,12 @@
         <Button IsEnabled="False" Click="StartOhneTask">Start ohne Thread</Button>
         <Button Click="StartTask">Start Task</Button>
         <Button Click="StartTaskMitTS">Start Task mit TS</Button>
+        <Button Click="StartAsyncAwait">Start Async/Await</Button>
 
         <ProgressBar Height="22" Name="pb1"/>
-        
+
+        <Button Click="Abbrechen">Abbrechen</Button>
+        <Button Click="CountEmployees">DB Count</Button>
+        <Button Click="StarteAlteMethode">Alte Methode</Button>
     </StackPanel>
 </Window>
