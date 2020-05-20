@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace HalloSerializer
 {
 
+    [Serializable()]
     public class BooksResult
     {
         public string kind { get; set; }
@@ -14,6 +16,7 @@ namespace HalloSerializer
         public Item[] items { get; set; }
     }
 
+    [Serializable()]
     public class Item
     {
         public string kind { get; set; }
@@ -26,16 +29,22 @@ namespace HalloSerializer
         public Searchinfo searchInfo { get; set; }
     }
 
+    [Serializable()]
     public class Volumeinfo
     {
         public string title { get; set; }
+
+        [SoapIgnore]
         public string[] authors { get; set; }
         public string publisher { get; set; }
         public string publishedDate { get; set; }
+
+        [SoapIgnore]
         public Industryidentifier[] industryIdentifiers { get; set; }
         public Readingmodes readingModes { get; set; }
         public int pageCount { get; set; }
         public string printType { get; set; }
+        [SoapIgnore]
         public string[] categories { get; set; }
         public string maturityRating { get; set; }
         public bool allowAnonLogging { get; set; }
@@ -52,30 +61,35 @@ namespace HalloSerializer
         public string description { get; set; }
     }
 
+    [Serializable()]
     public class Readingmodes
     {
         public bool text { get; set; }
         public bool image { get; set; }
     }
 
+    [Serializable()]
     public class Panelizationsummary
     {
         public bool containsEpubBubbles { get; set; }
         public bool containsImageBubbles { get; set; }
     }
 
+    [Serializable()]
     public class Imagelinks
     {
         public string smallThumbnail { get; set; }
         public string thumbnail { get; set; }
     }
 
+    [Serializable()]
     public class Industryidentifier
     {
         public string type { get; set; }
         public string identifier { get; set; }
     }
 
+    [Serializable()]
     public class Saleinfo
     {
         public string country { get; set; }
@@ -83,6 +97,7 @@ namespace HalloSerializer
         public bool isEbook { get; set; }
     }
 
+    [Serializable()]
     public class Accessinfo
     {
         public string country { get; set; }
@@ -97,17 +112,20 @@ namespace HalloSerializer
         public bool quoteSharingAllowed { get; set; }
     }
 
+    [Serializable()]
     public class Epub
     {
         public bool isAvailable { get; set; }
     }
 
+    [Serializable()]
     public class Pdf
     {
         public bool isAvailable { get; set; }
         public string acsTokenLink { get; set; }
     }
 
+    [Serializable()]
     public class Searchinfo
     {
         public string textSnippet { get; set; }
