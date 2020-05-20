@@ -150,7 +150,7 @@ namespace HalloTPL_und_AsyncAwait
                         var count = await cmd.ExecuteScalarAsync(cts.Token);
                         MessageBox.Show($"{count} Employees in DB");
                     }
-                }
+                } //con.Disose(); ==> con.Close();
             }
             catch (OperationCanceledException)
             {
