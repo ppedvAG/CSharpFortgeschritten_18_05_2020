@@ -54,19 +54,50 @@ namespace HalloTPL
                 });
 
             t1.Start();
+
+            //t1.ContinueWith(t=>t2.Start()); //t2 erst startet wenn t1 fertig
             t2.Start();
 
-
+            Console.WriteLine($"Result of T2: {t2.Result}");//wartet automatisch
             //t2.Wait();
             //t1.Wait();
 
             //Task.WaitAll(t1, t2);
-            //Console.WriteLine($"Result of T2: {t2.Result}");//wartet automatisch
 
+            //var s = new ThreadStart(MachWas);
 
+            Timer timer = new Timer(WennFertig);
+            timer.Change(100, 100);
+
+            long result = IchWillEineMethode(MachWas, 17);
 
             Console.WriteLine("Ende");
             Console.ReadLine();
+        }
+
+        public delegate byte EineDooferDelegate();
+        //public static long IchWillEineMethodeMODERN(Func<byte> dele, int anzahl) { return IchWillEineMethode(dele, anzahl); }
+        public static long IchWillEineMethode(EineDooferDelegate dele, int anzahl)
+        {
+            long result = 0;
+
+            for (int i = 0; i < anzahl; i++)
+            {
+                result += dele.Invoke();
+            }
+            return result;
+        }
+
+        private static void WennFertig(object state)
+        {
+            Console.WriteLine("fertig !!1");
+            ((Timer)state).Change(500, 2000);
+        }
+
+        private static byte MachWas()
+        {
+            Console.WriteLine("Grüße vom alten Thread");
+            return 12;
         }
 
         static void Zähle()
