@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -113,10 +114,38 @@ namespace HalloSerializer
             {
                 using (var fs = File.OpenWrite(dlg.FileName))
                 {
-                    
+
                     var sf = new SoapFormatter();
-                    sf.Serialize(fs, ((IEnumerable<Volumeinfo>) dataGridView1.DataSource).First());
+                    sf.Serialize(fs, ((IEnumerable<Volumeinfo>)dataGridView1.DataSource).First());
                 }
+            }
+        }
+
+
+        public IEnumerable<int> GetZahlenDoof()
+        {
+            List<int> zahlen = new List<int>();
+            zahlen.Add(56);
+            zahlen.Add(1);
+            zahlen.Add(-19);
+            zahlen.Add(default);
+            return zahlen;
+        }
+
+
+        public IEnumerable<int> GetZahlen()
+        {
+            yield return 56;
+            yield return 1;
+            yield return -19;
+            yield return default;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            foreach (var item in GetZahlen())
+            {
+                Debug.WriteLine(item);
             }
         }
     }
